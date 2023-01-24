@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">NikeTest</string>
+    <string name="home">خانه</string>
+    <string name="cart">سبد خرید</string>
+    <string name="profile">اطلاعات کاربری</string>
+    <string name="latest">جدیدترین</string>
+    <string name="popular">پرفروش ترین</string>
+    <string name="viewAll">مشاهده ی همه</string>
+    <string name="comments">نظرات کاربران</string>
+    <string name="insertComment">ثبت نظر</string>
+    <string name="viewAllComments">مشاهده همه نظرات</string>
+</resources>
