@@ -1,4 +1,4 @@
-package com.example.niketest.feature.main
+package com.example.niketest.feature.home
 
 import android.content.Intent
 import android.os.Bundle
@@ -12,23 +12,30 @@ import com.example.niketest.common.EXTRA_KEY_DATA
 import com.example.niketest.common.NikeFragment
 import com.example.niketest.common.convertDpToPixel
 import com.example.niketest.data.Product
+import com.example.niketest.data.SORT_LATEST
+import com.example.niketest.data.SORT_POPULAR
+import com.example.niketest.feature.common.ProductListAdapter
+import com.example.niketest.feature.common.VIEW_TYPE_ROUND
+import com.example.niketest.feature.list.ProductListActivity
+import com.example.niketest.feature.main.BannerSliderAdapter
 import com.example.niketest.feature.product.ProductDetailActivity
-import kotlinx.android.synthetic.main.fragment_main.*
+import kotlinx.android.synthetic.main.fragment_home.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 import timber.log.Timber
 
-class MainFragment : NikeFragment(),ProductListAdapter.OnProductClickListener {
-    val mainViewModel: MainViewModel by viewModel()
-    val productListLatestAdapter: ProductListAdapter by inject()
-    val productListPopularAdapter: ProductListAdapter by inject()
+class HomeFragment : NikeFragment(), ProductListAdapter.OnProductClickListener {
+    val homeViewModel: HomeViewModel by viewModel()
+    val productListLatestAdapter: ProductListAdapter by inject { parametersOf(VIEW_TYPE_ROUND) }
+    val productListPopularAdapter: ProductListAdapter by inject { parametersOf(VIEW_TYPE_ROUND) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_main, container, false)
+        return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -44,18 +51,31 @@ class MainFragment : NikeFragment(),ProductListAdapter.OnProductClickListener {
         productListLatestAdapter.onProductClickListener=this
         productListPopularAdapter.onProductClickListener=this
 
-        mainViewModel.productLatestLiveData.observe(viewLifecycleOwner) {
+        homeViewModel.productLatestLiveData.observe(viewLifecycleOwner) {
             Timber.tag("latest").i("product : ")
             productListLatestAdapter.products = it as ArrayList<Product>
         }
-        mainViewModel.productPopularLiveData.observe(viewLifecycleOwner) {
+        homeViewModel.productPopularLiveData.observe(viewLifecycleOwner) {
             Timber.tag("popular").i("product : ")
             productListPopularAdapter.products= it as ArrayList<Product>
         }
-        mainViewModel.progressBarLiveData.observe(viewLifecycleOwner) {
+        homeViewModel.progressBarLiveData.observe(viewLifecycleOwner) {
             setProgressIndicator(it)
         }
-        mainViewModel.bannerLiveData.observe(viewLifecycleOwner) {
+
+        viewLatestProductsBtn.setOnClickListener {
+            startActivity(Intent(requireContext(),ProductListActivity::class.java).apply {
+                putExtra(EXTRA_KEY_DATA, SORT_LATEST)
+            })
+        }
+
+        viewPopularProductsBtn.setOnClickListener {
+            startActivity(Intent(requireContext(),ProductListActivity::class.java).apply {
+                putExtra(EXTRA_KEY_DATA, SORT_POPULAR)
+            })
+        }
+
+        homeViewModel.bannerLiveData.observe(viewLifecycleOwner) {
             Timber.i(it.toString())
             val bannerSliderAdapter = BannerSliderAdapter(this, it)
             bannerSliderViewPager.adapter = bannerSliderAdapter

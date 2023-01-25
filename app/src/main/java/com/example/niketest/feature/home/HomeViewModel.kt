@@ -1,4 +1,4 @@
-package com.example.niketest.feature.main
+package com.example.niketest.feature.home
 
 import androidx.lifecycle.MutableLiveData
 import com.example.niketest.common.NikeSingleObserver
@@ -13,7 +13,7 @@ import com.example.niketest.data.repo.ProductRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-class MainViewModel(
+class HomeViewModel(
      productRepository: ProductRepository,
      bannerRepository: BannerRepository
 ) : NikeViewModel() {

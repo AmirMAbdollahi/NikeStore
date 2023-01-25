@@ -8,8 +8,9 @@ import com.example.niketest.data.repo.sourse.CommentRemoteDataSource
 import com.example.niketest.data.repo.sourse.ProductLocalDataSource
 import com.example.niketest.data.repo.sourse.ProductRemoteDataSource
 import com.example.niketest.feature.ProductDetailViewModel
-import com.example.niketest.feature.main.MainViewModel
-import com.example.niketest.feature.main.ProductListAdapter
+import com.example.niketest.feature.common.ProductListAdapter
+import com.example.niketest.feature.list.ProductListViewModel
+import com.example.niketest.feature.home.HomeViewModel
 import com.example.niketest.feature.product.comment.CommentListViewModel
 import com.example.niketest.services.FrescoImageLoadingService
 import com.example.niketest.services.ImageLoadingService
@@ -39,12 +40,13 @@ class App : Application() {
                     ProductLocalDataSource()
                 )
             }
-            factory { ProductListAdapter(get()) }
+            factory { (viewType: Int) -> ProductListAdapter(viewType, get()) }
             factory<BannerRepository> { BannerRepositoryImpl(BannerRemoteDataSource(get())) }
             factory<CommentRepository> { CommentRepositoryImpl(CommentRemoteDataSource(get())) }
-            viewModel { MainViewModel(get(), get()) }
+            viewModel { HomeViewModel(get(), get()) }
             viewModel { (bundle: Bundle) -> ProductDetailViewModel(bundle, get()) }
             viewModel { (productId: Int) -> CommentListViewModel(productId, get()) }
+            viewModel { (sort: Int) -> ProductListViewModel(sort, get()) }
         }
 
         startKoin {
