@@ -36,4 +36,13 @@
         <item name="android:lineSpacingExtra">6dp</item>
         <item name="android:includeFontPadding">false</item>
     </style>
+    
+    <style name="Theme.Nike.AuthTheme" parent="Theme.NikeTest">
+        <item name="android:statusBarColor" tools:targetApi="lollipop">@color/black</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+        <item name="android:windowBackground">@color/black</item>
+        <item name="colorOnBackground">@color/white</item>
+        <item name="colorOnSurface">@color/white</item>
+        <item name="materialButtonStyle">@style/Theme.Nike.AuthTheme</item>
+    </style>
 </resources>

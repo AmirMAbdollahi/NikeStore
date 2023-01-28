@@ -18,6 +18,15 @@
     <string name="addToCart">افزودن به سبد خرید</string>
     <string name="unkonwn_error">خطای نامشخص</string>
     <string name="success_addToCart">به سبد خرید اضافه شد</string>
+    <string name="loginScreenTitle">ورود به حساب کاربری</string>
+    <string name="loginTitle">ورود</string>
+    <string name="email">ایمیل</string>
+    <string name="password">رمز عبور</string>
+    <string name="singUpHint">حساب کاربری ندارید؟</string>
+    <string name="singUp">ثبت نام</string>
+    <string name="authHint">ایمیل و رمز عبور خود را وارد کنید</string>
+    <string name="signUpScreenTitle">ایجاد حساب کاربری</string>
+    <string name="loginHint">قبلا ثبت نام کرده اید؟</string>
 
     <string-array name="sortTitleArray">
         <item>@string/sortLatest</item>
