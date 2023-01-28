@@ -87,6 +87,9 @@ dependencies {
     //dynamic animation
     implementation "androidx.dynamicanimation:dynamicanimation:1.0.0"
 
+    //eventbus
+    implementation("org.greenrobot:eventbus:3.3.1")
+
 
 
 }

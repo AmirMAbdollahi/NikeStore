@@ -41,7 +41,6 @@ class ProductListViewModel(var sort: Int, val productRepository: ProductReposito
         this.sort = sort
         this.selectedSortTitleLiveData.value = sortTitle[sort]
         getProducts()
-
     }
 
 

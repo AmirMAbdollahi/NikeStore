@@ -39,6 +39,7 @@ class ProductListActivity : NikeActivity(),ProductListAdapter.OnProductClickList
 
         productListAdapter.onProductClickListener=this
 
+        viewTypeChangerBtn.setImageResource(R.drawable.ic_view_type_large)
         viewTypeChangerBtn.setOnClickListener {
             if (productListAdapter.viewType == VIEW_TYPE_SMALL) {
                 viewTypeChangerBtn.setImageResource(R.drawable.ic_grid)
@@ -61,7 +62,6 @@ class ProductListActivity : NikeActivity(),ProductListAdapter.OnProductClickList
         productListViewModel.progressBarLiveData.observe(this){
             setProgressIndicator(it)
         }
-
 
         productListViewModel.productsLiveData.observe(this) {
             Timber.i(it.toString())

@@ -15,12 +15,15 @@
     <string name="sortPopular">پربازدیدترین</string>
     <string name="sortPriceHighToLow">گران ترین</string>
     <string name="sortPriceLowToHigh">ارزان ترین</string>
-    
+    <string name="addToCart">افزودن به سبد خرید</string>
+    <string name="unkonwn_error">خطای نامشخص</string>
+    <string name="success_addToCart">به سبد خرید اضافه شد</string>
+
     <string-array name="sortTitleArray">
         <item>@string/sortLatest</item>
         <item>@string/sortPopular</item>
         <item>@string/sortPriceHighToLow</item>
         <item>@string/sortPriceLowToHigh</item>
     </string-array>
-    
+
 </resources>
