@@ -10,7 +10,7 @@ class AuthActivity : NikeActivity() {
         setContentView(R.layout.activity_auth)
 
         supportFragmentManager.beginTransaction().apply {
-           replace(R.id.fragmentContainer,SignUpFragment())
+           replace(R.id.fragmentContainer,LoginFragment())
         }.commit()
 
     }
