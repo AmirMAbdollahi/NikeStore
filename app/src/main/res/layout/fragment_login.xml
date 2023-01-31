@@ -31,6 +31,7 @@
         <EditText
             android:id="@+id/emailEt"
             android:layout_width="@dimen/authViewWidth"
+            android:gravity="right|center_vertical"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:inputType="textEmailAddress"
@@ -39,6 +40,7 @@
         <EditText
             android:id="@+id/passwordEt"
             android:layout_width="@dimen/authViewWidth"
+            android:gravity="right|center_vertical"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:inputType="textPassword"
@@ -68,6 +70,7 @@
             android:text="@string/singUpHint"
             android:alpha="0.4"/>
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/singUpLinkBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/singUp"

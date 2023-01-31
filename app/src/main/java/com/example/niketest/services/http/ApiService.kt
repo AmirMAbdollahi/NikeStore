@@ -4,6 +4,8 @@ import com.example.niketest.data.*
 import com.google.gson.JsonObject
 import io.reactivex.Single
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -32,6 +34,9 @@ interface ApiService {
     @POST("user/register")
     fun signUp(@Body jsonObject: JsonObject): Single<MessageResponse>
 
+    @POST("auth/token")
+    fun refreshToken(@Body jsonObject: JsonObject):Call<TokenResponse>
+
 }
 
 fun createApiServiceInstance(): ApiService {
@@ -43,9 +48,12 @@ fun createApiServiceInstance(): ApiService {
                 newRequestBuilder.addHeader("Authorization","Bearer ${TokenContainer.token}")
 
             newRequestBuilder.addHeader("Accept","application/json")
-            newRequestBuilder.method(oldRequest.method(),oldRequest.body())
+            newRequestBuilder.method(oldRequest.method,oldRequest.body)
             return@addInterceptor it.proceed(newRequestBuilder.build())
-        }.build()
+        }.addInterceptor(HttpLoggingInterceptor().apply {
+            setLevel(HttpLoggingInterceptor.Level.BASIC)
+        })
+        .build()
 
 
     val retrofit = Retrofit.Builder().baseUrl("http://expertdevelopers.ir/api/v1/")

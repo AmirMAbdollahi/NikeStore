@@ -46,6 +46,7 @@ class App : Application() {
                     MODE_PRIVATE
                 )
             }
+            single { UserLocalDataSource(get()) }
             single<UserRepository> {
                 UserRepositoryImpl(
                     UserRemoteDataSource(get()),

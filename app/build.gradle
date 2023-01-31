@@ -90,6 +90,7 @@ dependencies {
     //eventbus
     implementation("org.greenrobot:eventbus:3.3.1")
 
-
+    //logging-interceptor
+    implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
 
 }
