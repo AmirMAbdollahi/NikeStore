@@ -91,7 +91,7 @@ interface NikeView {
                     nikeException.serverMassage ?: it.getString(nikeException.userFriendlyMessage)
                 )
                 NikeException.Type.AUTH -> {
-                    it.startActivity(Intent(it,AuthActivity::class.java))
+                    it.startActivity(Intent(it, AuthActivity::class.java))
                     Toast.makeText(it, nikeException.serverMassage, Toast.LENGTH_SHORT).show()
                 }
             }
@@ -103,6 +103,21 @@ interface NikeView {
             Snackbar.make(it, message, duration).show()
         }
 
+    }
+
+    fun showEmptyState(layoutResId: Int): View? {
+        rootView?.let {
+            viewContext?.let { context ->
+                var emptyState = it.findViewById<View>(R.id.emptyStateRootView)
+                if (emptyState == null) {
+                    emptyState = LayoutInflater.from(context).inflate(layoutResId, it, false)
+                    it.addView(emptyState)
+                }
+                emptyState.visibility = View.VISIBLE
+                return emptyState
+            }
+        }
+        return null
     }
 
 }

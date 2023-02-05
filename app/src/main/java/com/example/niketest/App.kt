@@ -7,9 +7,11 @@ import com.example.niketest.data.repo.*
 import com.example.niketest.data.repo.sourse.*
 import com.example.niketest.feature.ProductDetailViewModel
 import com.example.niketest.feature.auth.AuthViewModel
+import com.example.niketest.feature.cart.CartViewModel
 import com.example.niketest.feature.common.ProductListAdapter
 import com.example.niketest.feature.list.ProductListViewModel
 import com.example.niketest.feature.home.HomeViewModel
+import com.example.niketest.feature.main.MainViewModel
 import com.example.niketest.feature.product.comment.CommentListViewModel
 import com.example.niketest.services.FrescoImageLoadingService
 import com.example.niketest.services.ImageLoadingService
@@ -62,6 +64,8 @@ class App : Application() {
             viewModel { (productId: Int) -> CommentListViewModel(productId, get()) }
             viewModel { (sort: Int) -> ProductListViewModel(sort, get()) }
             viewModel { AuthViewModel(get()) }
+            viewModel { CartViewModel(get()) }
+            viewModel { MainViewModel(get()) }
         }
 
         startKoin {

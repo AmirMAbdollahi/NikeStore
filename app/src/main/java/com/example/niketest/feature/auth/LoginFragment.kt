@@ -47,4 +47,9 @@ class LoginFragment : Fragment() {
         }
 
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        compositeDisposable.clear()
+    }
 }

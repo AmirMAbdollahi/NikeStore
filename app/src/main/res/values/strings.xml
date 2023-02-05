@@ -27,6 +27,16 @@
     <string name="authHint">ایمیل و رمز عبور خود را وارد کنید</string>
     <string name="signUpScreenTitle">ایجاد حساب کاربری</string>
     <string name="loginHint">قبلا ثبت نام کرده اید؟</string>
+    <string name="pay">پرداخت</string>
+    <string name="count">تعداد</string>
+    <string name="removeFromCart">حذف از سبد خرید</string>
+    <string name="purchaseDetail">جزییات خرید</string>
+    <string name="totalPrice">مبلغ کل خرید</string>
+    <string name="shippingCost">هزینه ی ارسال</string>
+    <string name="payablePrice">مبلغ قابل پرداخت</string>
+    <string name="cartEmptyStateLoginRequired">وارد حساب کاربری خود شوید</string>
+    <string name="cartEmptyStateCallToAction">ورود به حساب کاربری</string>
+    <string name="cartEmptyState">هیچ خبری اینجا نیست!!!</string>
 
     <string-array name="sortTitleArray">
         <item>@string/sortLatest</item>
