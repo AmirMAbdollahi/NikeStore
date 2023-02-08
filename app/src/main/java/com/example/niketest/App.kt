@@ -8,11 +8,13 @@ import com.example.niketest.data.repo.sourse.*
 import com.example.niketest.feature.ProductDetailViewModel
 import com.example.niketest.feature.auth.AuthViewModel
 import com.example.niketest.feature.cart.CartViewModel
+import com.example.niketest.feature.checkout.CheckOutViewModel
 import com.example.niketest.feature.common.ProductListAdapter
 import com.example.niketest.feature.list.ProductListViewModel
 import com.example.niketest.feature.home.HomeViewModel
 import com.example.niketest.feature.main.MainViewModel
 import com.example.niketest.feature.product.comment.CommentListViewModel
+import com.example.niketest.feature.shipping.ShippingViewModel
 import com.example.niketest.services.FrescoImageLoadingService
 import com.example.niketest.services.ImageLoadingService
 import com.example.niketest.services.http.ApiService
@@ -55,6 +57,7 @@ class App : Application() {
                     UserLocalDataSource(get())
                 )
             }
+            single<OrderRepository> { OrderRepositoryImpl(OrderRemoteDataSource(get())) }
             factory { (viewType: Int) -> ProductListAdapter(viewType, get()) }
             factory<BannerRepository> { BannerRepositoryImpl(BannerRemoteDataSource(get())) }
             factory<CommentRepository> { CommentRepositoryImpl(CommentRemoteDataSource(get())) }
@@ -66,6 +69,8 @@ class App : Application() {
             viewModel { AuthViewModel(get()) }
             viewModel { CartViewModel(get()) }
             viewModel { MainViewModel(get()) }
+            viewModel { ShippingViewModel(get()) }
+            viewModel { (orderId:Int)-> CheckOutViewModel(orderId,get()) }
         }
 
         startKoin {
@@ -73,7 +78,7 @@ class App : Application() {
             modules(myModule)
         }
 
-        val userRepository:UserRepository=get()
+        val userRepository: UserRepository = get()
         userRepository.loadToken()
 
     }

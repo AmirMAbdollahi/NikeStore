@@ -4,8 +4,6 @@ import android.content.Intent
 import android.graphics.Paint
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
-import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.niketest.R
@@ -19,7 +17,6 @@ import com.example.niketest.feature.product.comment.CommentListActivity
 import com.example.niketest.services.ImageLoadingService
 import com.example.niketest.view.scroll.ObservableScrollViewCallbacks
 import com.example.niketest.view.scroll.ScrollState
-import com.google.android.material.snackbar.Snackbar
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers

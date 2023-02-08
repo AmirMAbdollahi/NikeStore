@@ -19,7 +19,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class MainActivity : NikeActivity() {
 
     private var currentNavController: LiveData<NavController>? = null
-    private val viewModel:MainViewModel by viewModel()
+    private val viewModel: MainViewModel by viewModel()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -66,7 +66,7 @@ class MainActivity : NikeActivity() {
         badge.backgroundColor =
             MaterialColors.getColor(mainBottomNavigationView, org.koin.android.R.attr.colorPrimary)
         badge.number = cartItemCount.count
-        badge.verticalOffset= convertDpToPixel(10f,this).toInt()
+        badge.verticalOffset = convertDpToPixel(10f, this).toInt()
         badge.isVisible = cartItemCount.count > 0
     }
 

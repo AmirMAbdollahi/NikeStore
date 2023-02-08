@@ -13,8 +13,10 @@ import com.example.niketest.common.EXTRA_KEY_DATA
 import com.example.niketest.common.NikeCompletableObserver
 import com.example.niketest.common.NikeFragment
 import com.example.niketest.data.CartItem
+import com.example.niketest.data.PurchaseDetail
 import com.example.niketest.feature.auth.AuthActivity
 import com.example.niketest.feature.product.ProductDetailActivity
+import com.example.niketest.feature.shipping.ShippingActivity
 import com.example.niketest.services.ImageLoadingService
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -74,6 +76,12 @@ class cartFragment : NikeFragment(), CartItemAdapter.CartItemViewCallBacks {
                     }
                 }
             } else emptyStateRootView?.visibility = View.GONE
+        }
+
+        payBtn.setOnClickListener {
+            startActivity(Intent(requireContext(),ShippingActivity::class.java).apply {
+                putExtra(EXTRA_KEY_DATA,viewModel.purchaseDetailLiveData.value)
+            })
         }
 
     }

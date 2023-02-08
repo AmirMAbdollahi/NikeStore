@@ -29,16 +29,16 @@ interface ApiService {
     fun addToCart(@Body jsonObject: JsonObject): Single<AddToCartResponse>
 
     @POST("cart/remove")
-    fun removeItemFromCart(@Body jsonObject: JsonObject):Single<MessageResponse>
+    fun removeItemFromCart(@Body jsonObject: JsonObject): Single<MessageResponse>
 
     @GET("cart/list")
-    fun getCart():Single<CartResponse>
+    fun getCart(): Single<CartResponse>
 
     @GET("cart/count")
-    fun getCartItemCount():Single<CartItemCount>
+    fun getCartItemCount(): Single<CartItemCount>
 
     @POST("cart/changeCount")
-    fun changeCount(@Body jsonObject: JsonObject):Single<AddToCartResponse>
+    fun changeCount(@Body jsonObject: JsonObject): Single<AddToCartResponse>
 
     @POST("auth/token")
     fun login(@Body jsonObject: JsonObject): Single<TokenResponse>
@@ -47,7 +47,13 @@ interface ApiService {
     fun signUp(@Body jsonObject: JsonObject): Single<MessageResponse>
 
     @POST("auth/token")
-    fun refreshToken(@Body jsonObject: JsonObject):Call<TokenResponse>
+    fun refreshToken(@Body jsonObject: JsonObject): Call<TokenResponse>
+
+    @POST("order/submit")
+    fun submitOrder(@Body jsonObject: JsonObject): Single<SubmitOrderResult>
+
+    @GET("order/checkout")
+    fun checkout(@Query("order_id") orderId: Int): Single<Checkout>
 
 }
 
@@ -57,10 +63,10 @@ fun createApiServiceInstance(): ApiService {
             val oldRequest = it.request()
             val newRequestBuilder = oldRequest.newBuilder()
             if (TokenContainer.token != null)
-                newRequestBuilder.addHeader("Authorization","Bearer ${TokenContainer.token}")
+                newRequestBuilder.addHeader("Authorization", "Bearer ${TokenContainer.token}")
 
-            newRequestBuilder.addHeader("Accept","application/json")
-            newRequestBuilder.method(oldRequest.method,oldRequest.body)
+            newRequestBuilder.addHeader("Accept", "application/json")
+            newRequestBuilder.method(oldRequest.method, oldRequest.body)
             return@addInterceptor it.proceed(newRequestBuilder.build())
         }.addInterceptor(HttpLoggingInterceptor().apply {
             setLevel(HttpLoggingInterceptor.Level.BASIC)

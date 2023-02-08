@@ -45,7 +45,7 @@ class CartItemAdapter(
                 cartItemViewCallBacks.onRemoveCartItemButtonClick(cartItem)
             }
             containerView.increaseBtn.setOnClickListener {
-                if (cartItem.count < 5){
+                if (cartItem.count < 5) {
                     cartItem.changeCountProgressBarIsVisible = true
                     containerView.changeCountProgressBar.visibility = View.VISIBLE
                     containerView.cartItemCountTv.visibility = View.INVISIBLE
@@ -66,7 +66,7 @@ class CartItemAdapter(
         }
     }
 
-    inner class PurchaseDetailViewHolder(override val containerView: View) :
+     class PurchaseDetailViewHolder(override val containerView: View) :
         RecyclerView.ViewHolder(containerView), LayoutContainer {
         fun bind(totalPrice: Int, shippingCost: Int, payablePrice: Int) {
             containerView.totalPriceTv.text = formatPrice(totalPrice)
