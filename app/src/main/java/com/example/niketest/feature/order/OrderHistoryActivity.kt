@@ -25,7 +25,7 @@ class OrderHistoryActivity : NikeActivity() {
             orderHistoryRv.adapter=OrderHistoryItemAdapter(this,it)
         }
 
-        
+
 
     }
 }
