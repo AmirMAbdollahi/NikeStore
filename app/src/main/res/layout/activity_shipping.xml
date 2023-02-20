@@ -36,7 +36,6 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/firstNameEt"
-                    android:text="امیر محمد"
                     style="@style/ShippingTextInputInputEditTextStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -51,7 +50,6 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/lastNameEt"
-                    android:text="عبداللهی"
                     style="@style/ShippingTextInputInputEditTextStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -66,7 +64,6 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/postalCodeEt"
-                    android:text="1234567890"
                     style="@style/ShippingTextInputInputEditTextStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -81,7 +78,6 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/phoneNumberEt"
-                    android:text="09130304809"
                     style="@style/ShippingTextInputInputEditTextStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -96,7 +92,6 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/addressEt"
-                    android:text="تهران بلوار پدر کوچه ی شکوفه انتهای کوچه دست چپ"
                     style="@style/ShippingTextInputInputEditTextStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

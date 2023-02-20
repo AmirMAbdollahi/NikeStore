@@ -1,6 +1,7 @@
 package com.example.niketest.data.repo
 
 import com.example.niketest.data.Checkout
+import com.example.niketest.data.OrderHistoryItem
 import com.example.niketest.data.SubmitOrderResult
 import com.example.niketest.data.repo.sourse.OrderDataSource
 import io.reactivex.Single
@@ -27,4 +28,6 @@ class OrderRepositoryImpl(private val orderDataSource: OrderDataSource) : OrderR
     override fun checkout(orderId: Int): Single<Checkout> {
         return orderDataSource.checkout(orderId)
     }
+
+    override fun list(): Single<List<OrderHistoryItem>> = orderDataSource.list()
 }

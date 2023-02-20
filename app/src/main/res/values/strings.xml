@@ -50,7 +50,13 @@
     <string name="orderHistory">سوابق سفارش</string>
     <string name="purchaseStatus">وضعیت سفارش</string>
     <string name="price">مبلغ</string>
-
+    <string name="favorites">لیست علاقه مندی ها</string>
+    <string name="signIn">ورود به حساب کاربری</string>
+    <string name="signOut">خروج از حساب کاربری</string>
+    <string name="guest_user">کاربر مهمان</string>
+    <string name="emptyStateFavorite">هنوز محصولی به لیست علاقه مندی اضافه نکردی</string>
+    <string name="favoriteHelpMessage">برای حذف محصول انگشت خود را روی ان نگهدارید</string>
+    <string name="orderHistory_orderId">شناسه ی سفارش</string>
 
     <string-array name="sortTitleArray">
         <item>@string/sortLatest</item>

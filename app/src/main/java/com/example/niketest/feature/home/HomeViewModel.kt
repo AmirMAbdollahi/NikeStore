@@ -1,6 +1,7 @@
 package com.example.niketest.feature.home
 
 import androidx.lifecycle.MutableLiveData
+import com.example.niketest.common.NikeCompletableObserver
 import com.example.niketest.common.NikeSingleObserver
 import com.example.niketest.common.NikeViewModel
 import com.example.niketest.common.asyncNetworkRequest
@@ -14,8 +15,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 class HomeViewModel(
-     productRepository: ProductRepository,
-     bannerRepository: BannerRepository
+    private val productRepository: ProductRepository,
+    bannerRepository: BannerRepository
 ) : NikeViewModel() {
     val productLatestLiveData = MutableLiveData<List<Product>>()
     val productPopularLiveData = MutableLiveData<List<Product>>()
@@ -33,8 +34,8 @@ class HomeViewModel(
 
             })
 
-        productRepository.getFavoriteProducts(SORT_POPULAR).subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
+        productRepository.getProduct(SORT_POPULAR)
+            .asyncNetworkRequest()
             .subscribe(object : NikeSingleObserver<List<Product>>(compositeDisposable) {
                 override fun onSuccess(t: List<Product>) {
                     productPopularLiveData.value = t
@@ -51,6 +52,26 @@ class HomeViewModel(
                 }
             })
 
+
+    }
+
+    fun addProductToFavorite(product: Product) {
+        if (product.isFavorite) {
+            productRepository.deleteFromFavorite(product)
+                .subscribeOn(Schedulers.io())
+                .subscribe(object : NikeCompletableObserver(compositeDisposable) {
+                    override fun onComplete() {
+                        product.isFavorite = false
+                    }
+                })
+        } else
+            productRepository.addToFavorite(product)
+                .subscribeOn(Schedulers.io())
+                .subscribe(object : NikeCompletableObserver(compositeDisposable) {
+                    override fun onComplete() {
+                        product.isFavorite = true
+                    }
+                })
 
     }
 

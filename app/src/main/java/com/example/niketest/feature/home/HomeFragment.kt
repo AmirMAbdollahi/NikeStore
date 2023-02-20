@@ -25,10 +25,10 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import timber.log.Timber
 
-class HomeFragment : NikeFragment(), ProductListAdapter.OnProductClickListener {
-    val homeViewModel: HomeViewModel by viewModel()
-    val productListLatestAdapter: ProductListAdapter by inject { parametersOf(VIEW_TYPE_ROUND) }
-    val productListPopularAdapter: ProductListAdapter by inject { parametersOf(VIEW_TYPE_ROUND) }
+class HomeFragment : NikeFragment(), ProductListAdapter.ProductEventListener {
+    private val homeViewModel: HomeViewModel by viewModel()
+    private val productListLatestAdapter: ProductListAdapter by inject { parametersOf(VIEW_TYPE_ROUND) }
+    private val productListPopularAdapter: ProductListAdapter by inject { parametersOf(VIEW_TYPE_ROUND) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,8 +48,8 @@ class HomeFragment : NikeFragment(), ProductListAdapter.OnProductClickListener {
             LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
         popularProductRv.adapter = productListPopularAdapter
 
-        productListLatestAdapter.onProductClickListener=this
-        productListPopularAdapter.onProductClickListener=this
+        productListLatestAdapter.productEventListener=this
+        productListPopularAdapter.productEventListener=this
 
         homeViewModel.productLatestLiveData.observe(viewLifecycleOwner) {
             Timber.tag("latest").i("product : ")
@@ -96,5 +96,9 @@ class HomeFragment : NikeFragment(), ProductListAdapter.OnProductClickListener {
         startActivity(Intent(requireContext(),ProductDetailActivity::class.java).apply {
             putExtra(EXTRA_KEY_DATA,product)
         })
+    }
+
+    override fun onFavoriteBtnClick(product: Product) {
+        homeViewModel.addProductToFavorite(product)
     }
 }

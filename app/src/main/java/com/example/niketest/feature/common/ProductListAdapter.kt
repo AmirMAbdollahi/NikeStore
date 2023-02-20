@@ -4,6 +4,7 @@ import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.niketest.R
@@ -23,7 +24,7 @@ class ProductListAdapter(
 ) :
     RecyclerView.Adapter<ProductListAdapter.ViewHolder>() {
 
-    var onProductClickListener: OnProductClickListener? = null
+    var productEventListener: ProductEventListener? = null
 
     var products = ArrayList<Product>()
         set(value) {
@@ -36,7 +37,7 @@ class ProductListAdapter(
         val titleTv: TextView = itemView.findViewById(R.id.productTitleTv)
         val currentPriceTv: TextView = itemView.findViewById(R.id.currentPriceTv)
         val previousPriceTv: TextView = itemView.findViewById(R.id.previousPriceTv)
-
+        val favoriteBtn:ImageView=itemView.findViewById(R.id.favoriteBtn)
         fun bindProduct(product: Product) {
             imageLoadingService.load(productIv, product.image)
             titleTv.text = product.title
@@ -45,8 +46,20 @@ class ProductListAdapter(
             previousPriceTv.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
             itemView.implementSpringAnimationTrait()
             itemView.setOnClickListener {
-                onProductClickListener?.onClickProduct(product)
+                productEventListener?.onClickProduct(product)
             }
+
+            if (product.isFavorite)
+                favoriteBtn.setImageResource(R.drawable.ic_favorite_fill)
+            else
+                favoriteBtn.setImageResource(R.drawable.ic_favorites)
+
+            favoriteBtn.setOnClickListener {
+                productEventListener?.onFavoriteBtnClick(product)
+                product.isFavorite=!product.isFavorite
+                notifyItemChanged(adapterPosition)
+            }
+
         }
 
     }
@@ -72,8 +85,9 @@ class ProductListAdapter(
 
     override fun getItemCount(): Int = products.size
 
-    interface OnProductClickListener {
+    interface ProductEventListener {
         fun onClickProduct(product: Product)
+        fun onFavoriteBtnClick(product:Product)
     }
 
 }

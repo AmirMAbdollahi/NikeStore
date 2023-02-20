@@ -8,13 +8,15 @@ import io.reactivex.Single
 class ProductRemoteDataSource(val apiService: ApiService) : ProductDataSource {
     override fun getProduct(sort: Int): Single<List<Product>> = apiService.getProduct(sort.toString())
 
-    override fun getFavoriteProducts(sort: Int): Single<List<Product>> = apiService.getProduct(sort.toString())
-
-    override fun addToFavorite(): Completable {
+    override fun getFavoriteProducts(): Single<List<Product>>{
         TODO("Not yet implemented")
     }
 
-    override fun deleteFromFavorite(): Completable {
+    override fun addToFavorite(product: Product): Completable {
+        TODO("Not yet implemented")
+    }
+
+    override fun deleteFromFavorite(product: Product): Completable {
         TODO("Not yet implemented")
     }
 }

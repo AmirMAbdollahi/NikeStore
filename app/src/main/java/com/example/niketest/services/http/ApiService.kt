@@ -55,6 +55,9 @@ interface ApiService {
     @GET("order/checkout")
     fun checkout(@Query("order_id") orderId: Int): Single<Checkout>
 
+    @GET("order/list")
+    fun orders(): Single<List<OrderHistoryItem>>
+
 }
 
 fun createApiServiceInstance(): ApiService {

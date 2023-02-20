@@ -7,9 +7,9 @@ import io.reactivex.Single
 interface ProductRepository {
     fun getProduct(sort:Int): Single<List<Product>>
 
-    fun getFavoriteProducts(sort: Int): Single<List<Product>>
+    fun getFavoriteProducts(): Single<List<Product>>
 
-    fun addToFavorite(): Completable
+    fun addToFavorite(product: Product): Completable
 
-    fun deleteFromFavorite(): Completable
+    fun deleteFromFavorite(product: Product): Completable
 }
