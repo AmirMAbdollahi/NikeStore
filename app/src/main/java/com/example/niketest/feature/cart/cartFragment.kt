@@ -75,7 +75,7 @@ class cartFragment : NikeFragment(), CartItemAdapter.CartItemViewCallBacks {
                         startActivity(Intent(requireContext(), AuthActivity::class.java))
                     }
                 }
-            } else emptyStateRootView?.visibility = View.GONE
+            } else emptyView?.visibility = View.GONE
         }
 
         payBtn.setOnClickListener {

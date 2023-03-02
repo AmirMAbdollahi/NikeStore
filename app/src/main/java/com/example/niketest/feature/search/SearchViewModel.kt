@@ -19,7 +19,7 @@ class SearchViewModel(val searchRepository: SearchRepository) : NikeViewModel() 
     }
 
     fun searchProduct(query: String) {
-        if (query.isEmpty() && !searchEmptyStatLiveData.value!!.mustShow){
+        if (query.isEmpty() ){
             searchEmptyStatLiveData.value=EmptyState(true,R.string.searchProduct)
         }
         progressBarLiveData.value = true
@@ -31,7 +31,7 @@ class SearchViewModel(val searchRepository: SearchRepository) : NikeViewModel() 
                     if (t.isNotEmpty()) {
                         searchEmptyStatLiveData.value = EmptyState(false)
                         searchLiveData.value = t
-                    } else if(!searchEmptyStatLiveData.value!!.mustShow) searchEmptyStatLiveData.value = EmptyState(true, R.string.searchProduct)
+                    } else searchEmptyStatLiveData.value = EmptyState(true, R.string.searchProduct)
                 }
             })
     }

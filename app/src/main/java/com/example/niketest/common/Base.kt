@@ -108,12 +108,12 @@ interface NikeView {
     fun showEmptyState(layoutResId: Int): View? {
         rootView?.let {
             viewContext?.let { context ->
-                var emptyState = it.findViewById<View>(R.id.emptyStateRootView)
-                if (emptyState == null) {
-                    emptyState = LayoutInflater.from(context).inflate(layoutResId, it, false)
-                    emptyState.tag = "emptyState"
-                    it.addView(emptyState)
-                }
+                var emptyState = it.findViewById<View>(R.id.emptyView)
+//                if (emptyState == null) {
+//                    emptyState = LayoutInflater.from(context).inflate(layoutResId, it, false)
+//                    emptyState.tag = "emptyState"
+//                    it.addView(emptyState)
+//                }
                 emptyState.visibility = View.VISIBLE
                 println("Amir visible")
                 return emptyState

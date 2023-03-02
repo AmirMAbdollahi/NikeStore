@@ -77,7 +77,7 @@ class SearchActivity : NikeActivity(), SearchProductsAdapter.SearchProductsEvent
 //                searchActivity.removeView(it)
 //                println("Amir remove")
 //            }
-            emptyStateView?.visibility = View.GONE
+            emptyView?.visibility = View.GONE
             println("Amir Gone")
         }
     }

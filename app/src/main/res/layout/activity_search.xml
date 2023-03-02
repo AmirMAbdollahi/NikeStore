@@ -45,7 +45,7 @@
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"/>
 
     <include
-        android:id="@+id/emptyStateView"
+        android:id="@+id/emptyView"
         layout="@layout/view_default_empty_state"
         android:visibility="gone"/>
 

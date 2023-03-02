@@ -44,5 +44,9 @@
         android:gravity="center"
         android:text="@string/pay" />
 
+    <include android:id="@+id/emptyView"
+        layout="@layout/view_cart_empty_state"
+        android:visibility="gone"/>
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
