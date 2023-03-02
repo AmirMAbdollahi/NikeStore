@@ -58,6 +58,9 @@ interface ApiService {
     @GET("order/list")
     fun orders(): Single<List<OrderHistoryItem>>
 
+    @GET("product/search")
+    fun searchProduct(@Query("q") query:String):Single<List<Product>>
+
 }
 
 fun createApiServiceInstance(): ApiService {

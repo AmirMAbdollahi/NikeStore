@@ -25,6 +25,10 @@ class OrderHistoryActivity : NikeActivity() {
             orderHistoryRv.adapter=OrderHistoryItemAdapter(this,it)
         }
 
+        orderToolbar.onBackButtonClickListener=View.OnClickListener {
+            finish()
+        }
+
 
 
     }

@@ -11,6 +11,7 @@
         android:layout_height="wrap_content">
 
         <com.example.niketest.view.NikeToolbar
+            android:id="@+id/checkOutToolbar"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             app:nt_title="@string/checkoutToolbarTitle" />

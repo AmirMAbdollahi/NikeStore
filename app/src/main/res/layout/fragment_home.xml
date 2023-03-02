@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -16,40 +16,53 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="56dp"
-                app:srcCompat="@drawable/ic_nike_logo"
-                android:layout_gravity="center_horizontal"/>
+                android:layout_gravity="center_horizontal"
+                app:srcCompat="@drawable/ic_nike_logo" />
 
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
+                <View
+                    android:id="@+id/etClick"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:translationZ="2dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp" />
+
                 <EditText
+                    android:id="@+id/etHomeSearch"
                     android:layout_width="match_parent"
                     android:layout_height="46dp"
-                    android:hint="جستجو"
-                    android:paddingEnd="16dp"
-                    android:textSize="15sp"
-                    android:textColor="?colorOnSurface"
-                    android:textColorHint="?android:textColorSecondary"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
+                    android:background="@drawable/background_et_search"
+                    android:hint="جستجو"
                     android:paddingStart="54dp"
-                    android:background="@drawable/background_et_search"/>
+                    android:paddingEnd="16dp"
+                    android:textColor="?colorOnSurface"
+                    android:textColorHint="?android:textColorSecondary"
+                    android:textSize="15sp" />
+
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="38dp"
                     android:layout_gravity="start|center_vertical"
-                    app:srcCompat="@drawable/ic_search"/>
+                    android:layout_marginStart="38dp"
+                    app:srcCompat="@drawable/ic_search" />
             </FrameLayout>
 
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/bannerSliderViewPager"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:id="@+id/bannerSliderViewPager"/>
+                    android:layout_marginTop="16dp" />
+
                 <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
                     android:id="@+id/sliderIndicator"
                     android:layout_width="wrap_content"
@@ -61,8 +74,8 @@
                     app:dotsSize="5dp"
                     app:dotsSpacing="3dp"
                     app:dotsWidthFactor="4"
-                    app:selectedDotColor="@color/black"
-                    app:progressMode="false" />
+                    app:progressMode="false"
+                    app:selectedDotColor="@color/black" />
             </FrameLayout>
 
             <FrameLayout
@@ -70,56 +83,62 @@
                 android:layout_height="wrap_content"
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|start"
                     android:text="@string/latest"
                     android:textAppearance="?textAppearanceHeadline6"
-                    android:textColor="?android:textColorSecondary"
-                    android:layout_gravity="center_vertical|start"/>
+                    android:textColor="?android:textColorSecondary" />
+
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/viewLatestProductsBtn"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/viewAll"
-                    style="@style/Widget.MaterialComponents.Button.TextButton"
-                    android:layout_gravity="center_vertical|end" />
+                    android:layout_gravity="center_vertical|end"
+                    android:text="@string/viewAll" />
             </FrameLayout>
+
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/latestProductRv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/latestProductRv"
+                android:clipToPadding="false"
                 android:paddingStart="12dp"
-                android:paddingEnd="12dp"
-                android:clipToPadding="false"/>
+                android:paddingEnd="12dp" />
 
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|start"
                     android:text="@string/popular"
                     android:textAppearance="?textAppearanceHeadline6"
-                    android:textColor="?android:textColorSecondary"
-                    android:layout_gravity="center_vertical|start"/>
+                    android:textColor="?android:textColorSecondary" />
+
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/viewPopularProductsBtn"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/viewAll"
-                    style="@style/Widget.MaterialComponents.Button.TextButton"
-                    android:layout_gravity="center_vertical|end" />
+                    android:layout_gravity="center_vertical|end"
+                    android:text="@string/viewAll" />
             </FrameLayout>
+
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/popularProductRv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/popularProductRv"
+                android:clipToPadding="false"
                 android:paddingStart="12dp"
-                android:paddingEnd="12dp"
-                android:clipToPadding="false"/>
+                android:paddingEnd="12dp" />
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

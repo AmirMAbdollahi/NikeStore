@@ -1,12 +1,10 @@
 package com.example.niketest.feature.favorites
 
 import android.view.LayoutInflater
-import android.view.TextureView
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.niketest.R
 import com.example.niketest.data.Product
 import com.example.niketest.services.ImageLoadingService
@@ -15,7 +13,7 @@ import com.example.niketest.view.NikeImageView
 class FavoriteProductsAdapter(
     val products: MutableList<Product>,
     val imageLoadingService: ImageLoadingService,
-    val favoriteProductEventListener: FavoriteProductEventListener
+    val favoriteProductEventListener: FavoriteProductEventListener? = null
 ) :
     RecyclerView.Adapter<FavoriteProductsAdapter.FavoriteProductViewHolder>() {
 
@@ -26,12 +24,12 @@ class FavoriteProductsAdapter(
             titleTv.text = product.title
             imageLoadingService.load(productIv, product.image)
             itemView.setOnClickListener {
-                favoriteProductEventListener.onClick(product)
+                favoriteProductEventListener!!.onClick(product)
             }
             itemView.setOnLongClickListener {
                 products.remove(product)
                 notifyItemRemoved(adapterPosition)
-                favoriteProductEventListener.onLongClick(product)
+                favoriteProductEventListener!!.onLongClick(product)
                 return@setOnLongClickListener false
             }
         }

@@ -11,7 +11,7 @@
         android:layout_height="wrap_content">
 
         <com.example.niketest.view.NikeToolbar
-            android:id="@+id/toolbarView"
+            android:id="@+id/orderToolbar"
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
             app:nt_title="@string/orderHistory" />

@@ -57,6 +57,7 @@
     <string name="emptyStateFavorite">هنوز محصولی به لیست علاقه مندی اضافه نکردی</string>
     <string name="favoriteHelpMessage">برای حذف محصول انگشت خود را روی ان نگهدارید</string>
     <string name="orderHistory_orderId">شناسه ی سفارش</string>
+    <string name="searchProduct">نام محصول مورد نظر خود را وارد کنید.</string>
 
     <string-array name="sortTitleArray">
         <item>@string/sortLatest</item>
@@ -64,5 +65,6 @@
         <item>@string/sortPriceHighToLow</item>
         <item>@string/sortPriceLowToHigh</item>
     </string-array>
+
 
 </resources>

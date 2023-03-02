@@ -19,6 +19,7 @@ import com.example.niketest.feature.common.VIEW_TYPE_ROUND
 import com.example.niketest.feature.list.ProductListActivity
 import com.example.niketest.feature.main.BannerSliderAdapter
 import com.example.niketest.feature.product.ProductDetailActivity
+import com.example.niketest.feature.search.SearchActivity
 import kotlinx.android.synthetic.main.fragment_home.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -88,6 +89,10 @@ class HomeFragment : NikeFragment(), ProductListAdapter.ProductEventListener {
             bannerSliderViewPager.layoutParams = layoutParams
 
             sliderIndicator.setViewPager2(bannerSliderViewPager)
+        }
+
+        etClick.setOnClickListener {
+            startActivity(Intent(requireContext(),SearchActivity::class.java))
         }
 
     }

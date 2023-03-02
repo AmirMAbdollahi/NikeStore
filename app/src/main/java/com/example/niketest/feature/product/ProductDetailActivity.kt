@@ -59,6 +59,9 @@ class ProductDetailActivity : NikeActivity() {
                 }
             }
         }
+        backBtn.setOnClickListener {
+            finish()
+        }
 
         initViews()
     }

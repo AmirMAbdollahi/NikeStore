@@ -11,6 +11,7 @@
         android:layout_height="wrap_content">
 
         <com.example.niketest.view.NikeToolbar
+            android:id="@+id/favoriteToolbar"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             app:nt_title="@string/favorites">
@@ -32,5 +33,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"/>
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

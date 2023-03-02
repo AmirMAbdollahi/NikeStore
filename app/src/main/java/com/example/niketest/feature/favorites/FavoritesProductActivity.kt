@@ -2,6 +2,7 @@ package com.example.niketest.feature.favorites
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.niketest.R
@@ -35,6 +36,10 @@ class FavoritesProductActivity : NikeActivity(),FavoriteProductsAdapter.Favorite
                 emptyStateMessageTv.text=getString(R.string.emptyStateFavorite)
             }
 
+        }
+
+        favoriteToolbar.onBackButtonClickListener= View.OnClickListener {
+            finish()
         }
 
     }

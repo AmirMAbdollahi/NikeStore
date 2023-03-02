@@ -63,6 +63,9 @@ class ShippingActivity : AppCompatActivity() {
         onlinePaymentBtn.setOnClickListener(onClickListener)
         codBtn.setOnClickListener(onClickListener)
 
+        shippingToolbar.onBackButtonClickListener=View.OnClickListener {
+            finish()
+        }
 
     }
 

@@ -44,4 +44,5 @@
         android:gravity="center"
         android:text="@string/pay" />
 
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
