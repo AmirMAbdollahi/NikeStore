@@ -41,4 +41,11 @@ class CommentAdapter(val showAll: Boolean = false) :
 
     override fun getItemCount(): Int = if (comments.size > 3 && !showAll) 3 else comments.size
 
+    fun addComment(comment:Comment){
+        this.comments.add(0,comment)
+        notifyItemInserted(0)
+
+    }
+
+
 }

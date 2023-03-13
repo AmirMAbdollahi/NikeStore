@@ -10,6 +10,7 @@ import com.example.niketest.data.repo.CommentRepository
 class CommentListViewModel(productId: Int, commentRepositoryImpl: CommentRepository) :
     NikeViewModel() {
 
+
     val commentsLiveData = MutableLiveData<List<Comment>>()
 
     init {

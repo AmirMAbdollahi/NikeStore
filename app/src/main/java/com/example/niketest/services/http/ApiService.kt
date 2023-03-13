@@ -25,6 +25,9 @@ interface ApiService {
     @GET("comment/list")
     fun getComments(@Query("product_id") productId: Int): Single<List<Comment>>
 
+    @POST("comment/add")
+    fun addComment(@Body jsonObject: JsonObject): Single<Comment>
+
     @POST("cart/add")
     fun addToCart(@Body jsonObject: JsonObject): Single<AddToCartResponse>
 
@@ -59,7 +62,7 @@ interface ApiService {
     fun orders(): Single<List<OrderHistoryItem>>
 
     @GET("product/search")
-    fun searchProduct(@Query("q") query:String):Single<List<Product>>
+    fun searchProduct(@Query("q") query: String): Single<List<Product>>
 
 }
 

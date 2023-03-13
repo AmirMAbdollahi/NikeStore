@@ -17,6 +17,7 @@ import com.example.niketest.feature.list.ProductListViewModel
 import com.example.niketest.feature.home.HomeViewModel
 import com.example.niketest.feature.main.MainViewModel
 import com.example.niketest.feature.order.OrderHistoryViewModel
+import com.example.niketest.feature.product.addComment.AddCommentViewModel
 import com.example.niketest.feature.product.comment.CommentListViewModel
 import com.example.niketest.feature.profile.ProfileViewModel
 import com.example.niketest.feature.search.SearchViewModel
@@ -84,6 +85,7 @@ class App : Application() {
             viewModel { FavoriteProductsViewModel(get()) }
             viewModel { OrderHistoryViewModel(get()) }
             viewModel { SearchViewModel(get()) }
+            viewModel { AddCommentViewModel(get()) }
         }
 
         startKoin {

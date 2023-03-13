@@ -16,7 +16,11 @@ import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-class ProductDetailViewModel(bundle: Bundle, private val commentRepositoryImpl: CommentRepository,val cartRepository: CartRepository) :
+class ProductDetailViewModel(
+    bundle: Bundle,
+    private val commentRepositoryImpl: CommentRepository,
+    val cartRepository: CartRepository
+) :
     NikeViewModel() {
 
     val productLiveData = MutableLiveData<Product>()
@@ -36,7 +40,8 @@ class ProductDetailViewModel(bundle: Bundle, private val commentRepositoryImpl: 
 
     }
 
-    fun onAddToCartBtn():Completable=cartRepository.addToCart(productLiveData.value!!.id).ignoreElement()
+    fun onAddToCartBtn(): Completable =
+        cartRepository.addToCart(productLiveData.value!!.id).ignoreElement()
 
 
 }
