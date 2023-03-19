@@ -10,11 +10,7 @@ import com.example.niketest.data.Comment
 import com.example.niketest.data.Product
 import com.example.niketest.data.repo.CartRepository
 import com.example.niketest.data.repo.CommentRepository
-import com.example.niketest.data.repo.CommentRepositoryImpl
 import io.reactivex.Completable
-import io.reactivex.Single
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 
 class ProductDetailViewModel(
     bundle: Bundle,
@@ -24,7 +20,9 @@ class ProductDetailViewModel(
     NikeViewModel() {
 
     val productLiveData = MutableLiveData<Product>()
-    val commentLiveData = MutableLiveData<List<Comment>>()
+    val commentListLiveData = MutableLiveData<List<Comment>>()
+    val commentLiveData = MutableLiveData<Comment>()
+
 
     init {
         productLiveData.value = bundle.getParcelable(EXTRA_KEY_DATA)
@@ -34,7 +32,7 @@ class ProductDetailViewModel(
             .doFinally { progressBarLiveData.value = false }
             .subscribe(object : NikeSingleObserver<List<Comment>>(compositeDisposable) {
                 override fun onSuccess(t: List<Comment>) {
-                    commentLiveData.value = t
+                    commentListLiveData.value = t
                 }
             })
 
@@ -42,6 +40,16 @@ class ProductDetailViewModel(
 
     fun onAddToCartBtn(): Completable =
         cartRepository.addToCart(productLiveData.value!!.id).ignoreElement()
+
+    fun addComment(title: String, content: String, productId: Int) {
+        commentRepositoryImpl.insertSingle(title, content, productId)
+            .asyncNetworkRequest()
+            .subscribe(object : NikeSingleObserver<Comment>(compositeDisposable) {
+                override fun onSuccess(t: Comment) {
+                    commentLiveData.value = t
+                }
+            })
+    }
 
 
 }

@@ -1,5 +1,6 @@
 package com.example.niketest.feature.product.addComment
 
+import android.app.Activity
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
@@ -7,32 +8,41 @@ import android.content.DialogInterface
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.FragmentActivity
 import com.example.niketest.R
 import com.example.niketest.common.EXTRA_KEY_ID
+import com.example.niketest.common.NikeCompletableObserver
 import com.example.niketest.data.Comment
+import com.example.niketest.feature.product.ProductDetailActivity
+import com.example.niketest.feature.product.comment.CommentListActivity
 import com.google.android.material.textfield.TextInputEditText
-import kotlinx.android.synthetic.main.item_add_comment.*
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.koin.core.parameter.parametersOf
 
 class AddCommentFragment : DialogFragment() {
 
     val viewModel: AddCommentViewModel by viewModel()
-
+    val compositeDisposable = CompositeDisposable()
+    var parentActivity: FragmentActivity? = null
     internal lateinit var listener: NoticeDialogListener
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         // Verify that the host activity implements the callback interface
-        try {
-            // Instantiate the NoticeDialogListener so we can send events to the host
-            listener = context as NoticeDialogListener
-        } catch (e: ClassCastException) {
-            // The activity doesn't implement the interface, throw exception
-            throw ClassCastException(
-                (context.toString() +
-                        " must implement NoticeDialogListener")
-            )
+        parentActivity = activity
+        if (parentActivity is CommentListActivity) {
+            try {
+                // Instantiate the NoticeDialogListener so we can send events to the host
+                listener = context as NoticeDialogListener
+            } catch (e: ClassCastException) {
+                // The activity doesn't implement the interface, throw exception
+                throw ClassCastException(
+                    (context.toString() +
+                            " must implement NoticeDialogListener")
+                )
+            }
         }
     }
 
@@ -52,14 +62,32 @@ class AddCommentFragment : DialogFragment() {
                     DialogInterface.OnClickListener { dialog, id ->
                         val titleEt = v.findViewById<TextInputEditText>(R.id.titleEt)
                         val contentEt = v.findViewById<TextInputEditText>(R.id.contentEt)
-                        viewModel.addComment(
-                            titleEt!!.text.toString(),
-                            contentEt!!.text.toString(),
-                            productId!!
-                        )
-                        viewModel.commentLiveData.observe(this) {
-                            listener.onDialogPositiveClick(this, it)
+                        if (parentActivity is CommentListActivity) {
+                            viewModel.addCommentSingle(
+                                titleEt!!.text.toString(),
+                                contentEt!!.text.toString(),
+                                productId!!
+                            )
+                            Thread.sleep(500)
+                            viewModel.commentLiveData.observe(this) { it ->
+                                listener.onDialogPositiveClick(this, it)
+                            }
+                        } else if (parentActivity is ProductDetailActivity) {
+                            viewModel.addCommentCompletable(
+                                titleEt!!.text.toString(),
+                                contentEt!!.text.toString(),
+                                productId!!
+                            ).subscribeOn(Schedulers.io()).observeOn(
+                                AndroidSchedulers.mainThread()
+                            )
+                                .subscribe(object : NikeCompletableObserver(compositeDisposable) {
+                                    override fun onComplete() {
+
+                                    }
+
+                                })
                         }
+
                     })
                 .setNegativeButton(R.string.cancel,
                     DialogInterface.OnClickListener { dialog, id ->
@@ -69,6 +97,7 @@ class AddCommentFragment : DialogFragment() {
         } ?: throw IllegalStateException("Activity cannot be null")
 
     }
+
 
     interface NoticeDialogListener {
         fun onDialogPositiveClick(dialog: DialogFragment, comment: Comment)

@@ -12,7 +12,10 @@ import com.example.niketest.common.NikeActivity
 import com.example.niketest.common.NikeCompletableObserver
 import com.example.niketest.common.formatPrice
 import com.example.niketest.data.Comment
+import com.example.niketest.data.TokenContainer
 import com.example.niketest.feature.ProductDetailViewModel
+import com.example.niketest.feature.auth.AuthActivity
+import com.example.niketest.feature.product.addComment.AddCommentFragment
 import com.example.niketest.feature.product.comment.CommentListActivity
 import com.example.niketest.services.ImageLoadingService
 import com.example.niketest.view.scroll.ObservableScrollViewCallbacks
@@ -30,7 +33,7 @@ class ProductDetailActivity : NikeActivity() {
     val productDetailViewModel: ProductDetailViewModel by viewModel { parametersOf(intent.extras) }
     val imageLoadingService: ImageLoadingService by inject()
     val commentAdapter: CommentAdapter = CommentAdapter()
-    val compositeDisposable=CompositeDisposable()
+    val compositeDisposable = CompositeDisposable()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_product_detail)
@@ -44,23 +47,35 @@ class ProductDetailActivity : NikeActivity() {
             toolbarTitleTv.text = it.title
         }
 
-        productDetailViewModel.progressBarLiveData.observe(this){
+        productDetailViewModel.progressBarLiveData.observe(this) {
             setProgressIndicator(it)
         }
-        productDetailViewModel.commentLiveData.observe(this) {
+        productDetailViewModel.commentListLiveData.observe(this) {
             Timber.tag("comments are : ").i(it.toString())
             commentAdapter.comments = it as ArrayList<Comment>
-            if (it.size > 3){
+            if (it.size > 3) {
                 viewAllCommentsBtn.visibility = View.VISIBLE
                 viewAllCommentsBtn.setOnClickListener {
-                    startActivity(Intent(this,CommentListActivity::class.java).apply {
-                        putExtra(EXTRA_KEY_ID,productDetailViewModel.productLiveData.value!!.id)
+                    startActivity(Intent(this, CommentListActivity::class.java).apply {
+                        putExtra(EXTRA_KEY_ID, productDetailViewModel.productLiveData.value!!.id)
                     })
                 }
             }
         }
         backBtn.setOnClickListener {
             finish()
+        }
+        addComment.setOnClickListener {
+            if (TokenContainer.token.isNullOrEmpty()) {
+                startActivity(Intent(this, AuthActivity::class.java))
+            }else {
+                val newFragment = AddCommentFragment().apply {
+                    arguments = Bundle().apply {
+                        putInt(EXTRA_KEY_ID, productDetailViewModel.productLiveData.value!!.id)
+                    }
+                }
+                newFragment.show(supportFragmentManager, null)
+            }
         }
 
         initViews()

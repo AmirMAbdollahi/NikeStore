@@ -2,6 +2,7 @@ package com.example.niketest.services.http
 
 import com.example.niketest.data.*
 import com.google.gson.JsonObject
+import io.reactivex.Completable
 import io.reactivex.Single
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -26,7 +27,7 @@ interface ApiService {
     fun getComments(@Query("product_id") productId: Int): Single<List<Comment>>
 
     @POST("comment/add")
-    fun addComment(@Body jsonObject: JsonObject): Single<Comment>
+    fun addCommentSingle(@Body jsonObject: JsonObject): Single<Comment>
 
     @POST("cart/add")
     fun addToCart(@Body jsonObject: JsonObject): Single<AddToCartResponse>

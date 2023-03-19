@@ -1,5 +1,6 @@
 package com.example.niketest.feature.product.comment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.DialogFragment
@@ -10,6 +11,8 @@ import com.example.niketest.R
 import com.example.niketest.common.EXTRA_KEY_ID
 import com.example.niketest.common.NikeActivity
 import com.example.niketest.data.Comment
+import com.example.niketest.data.TokenContainer
+import com.example.niketest.feature.auth.AuthActivity
 import com.example.niketest.feature.product.CommentAdapter
 import com.example.niketest.feature.product.addComment.AddCommentFragment
 import kotlinx.android.synthetic.main.activity_comment_list.*
@@ -38,6 +41,8 @@ class CommentListActivity : NikeActivity(), AddCommentFragment.NoticeDialogListe
             commentsRv.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
             commentAdapter.comments = it as ArrayList<Comment>
             commentsRv.adapter = commentAdapter
+            commentAdapter.submitList(it)
+            //commentsRv.setHasFixedSize(true)
         }
 
         commentListToolbar.onBackButtonClickListener = View.OnClickListener {
@@ -45,12 +50,16 @@ class CommentListActivity : NikeActivity(), AddCommentFragment.NoticeDialogListe
         }
 
         insertCommentBtn.setOnClickListener {
-            val newFragment = AddCommentFragment().apply {
-                arguments=Bundle().apply {
-                    putInt(EXTRA_KEY_ID,intent.extras!!.getInt(EXTRA_KEY_ID))
+            if (TokenContainer.token.isNullOrEmpty()) {
+                startActivity(Intent(this, AuthActivity::class.java))
+            }else{
+                val newFragment = AddCommentFragment().apply {
+                    arguments = Bundle().apply {
+                        putInt(EXTRA_KEY_ID, intent.extras!!.getInt(EXTRA_KEY_ID))
+                    }
                 }
+                newFragment.show(supportFragmentManager, null)
             }
-            newFragment.show(supportFragmentManager, null)
         }
 
     }
@@ -60,7 +69,8 @@ class CommentListActivity : NikeActivity(), AddCommentFragment.NoticeDialogListe
         comment: Comment
     ) {
         commentAdapter.addComment(comment)
-
+        commentAdapter.submitList(commentAdapter.comments)
+        commentsRv.smoothScrollToPosition(0)
     }
 
     override fun onDialogNegativeClick(dialog: DialogFragment) {

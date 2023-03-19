@@ -24,12 +24,13 @@
         android:id="@+id/contentEtl"
         style="@style/ShippingTextInputLayoutStyle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="120dp">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/contentEt"
             style="@style/ShippingTextInputInputEditTextStyle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="top|start"
             android:hint="@string/content" />
     </com.google.android.material.textfield.TextInputLayout>
 
